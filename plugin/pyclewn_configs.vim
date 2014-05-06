@@ -13,3 +13,7 @@ function! s:GetAllConfigsInPath(path, prefix)
 	return l:configFiles
 endfunction
 
+function! s:FileCompletion(ArgLead, CmdLine, CursorPos)
+	return s:GetAllConfigsInPath('/home/blibert/.vim/pyclewn_configs/', a:ArgLead)
+endfunction
+
