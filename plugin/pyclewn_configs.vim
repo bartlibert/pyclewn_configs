@@ -1,7 +1,7 @@
-"if exists('g:loaded_pyclewn_configs')
-	"finish
-"endif
-"let g:pyclewn_configs = 1
+if exists('g:loaded_pyclewn_configs')
+	finish
+endif
+let g:pyclewn_configs = 1
 
 echom "Bla"
 
