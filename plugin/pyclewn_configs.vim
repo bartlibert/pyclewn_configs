@@ -3,6 +3,7 @@ if exists('g:loaded_pyclewn_configs')
 endif
 let g:pyclewn_configs = 1
 
+command! -nargs=1 -complete=customlist,s:FileCompletion StartPyclewn :call s:StartDebugging("<args>")
 
 function! s:GetAllConfigsInPath(path, prefix)
 	let l:configFiles = []
