@@ -3,7 +3,6 @@ if exists('g:loaded_pyclewn_configs')
 endif
 let g:pyclewn_configs = 1
 
-echom "Bla"
 
 function! s:GetAllConfigsInPath(path, prefix)
 	let l:configFiles = []
