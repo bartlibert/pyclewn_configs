@@ -13,4 +13,3 @@ function! s:GetAllConfigsInPath(path, prefix)
 	return l:configFiles
 endfunction
 
-autocmd VimEnter * call s:GetAllConfigFilesInPath()
