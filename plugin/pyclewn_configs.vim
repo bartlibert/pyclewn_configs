@@ -17,3 +17,11 @@ function! s:FileCompletion(ArgLead, CmdLine, CursorPos)
 	return s:GetAllConfigsInPath('/home/blibert/.vim/pyclewn_configs/', a:ArgLead)
 endfunction
 
+function! s:StartDebugging(configName)
+	 let l:path = '/home/blibert/.vim/pyclewn_configs/' . a:configName . '.cfg'
+	 let l:ini_result = IniParser#Read(l:path)
+	 execute ':Pyclewn'
+	 execute ':Cfile ' . l:ini_result['mandatory']['executable']
+	 execute ':Cmapkeys'
+endfunction
+
