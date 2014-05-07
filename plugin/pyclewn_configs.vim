@@ -21,6 +21,23 @@ function! s:ReplacePrefix(value, prefix, replacement)
 	return substitute(a:value, a:prefix, a:replacement, '')
 endfunction
 
+function! s:SectionExists(ini, section)
+	 if !has_key(a:ini, a:section)
+		 return 0
+	 endif
+	 return 1
+endfunction
+
+function! s:ParameterExists(ini, section, parameter)
+	 if !s:SectionExists(a:ini, a:section)
+		 return 0
+	 endif
+	 if !has_key(a:ini[a:section], a:parameter)
+		 return 0
+	 endif
+	 return 1
+endfunction
+
 function! s:StartDebugging(configName)
 	 let l:path = '/home/blibert/.vim/pyclewn_configs/' . a:configName . '.cfg'
 	 let l:ini_result = IniParser#Read(l:path)
