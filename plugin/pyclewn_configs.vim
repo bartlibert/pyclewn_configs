@@ -40,9 +40,35 @@ endfunction
 
 function! s:StartDebugging(configName)
 	 let l:path = '/home/blibert/.vim/pyclewn_configs/' . a:configName . '.cfg'
-	 let l:ini_result = IniParser#Read(l:path)
+	 let l:ini = IniParser#Read(l:path)
+
+	 if s:ParameterExists(l:ini, 'optional', 'gdb_path')
+		 execute ':let b:pyclewn_args.=" --pgm=' . s:ReplacePrefix(l:ini['optional']['gdb_path'], '<prefix>', '/repo/sw') . '"'
+	 endif
+
 	 execute ':Pyclewn'
-	 execute ':Cfile ' . l:ini_result['mandatory']['executable']
+	 execute ':Cfile ' . s:ReplacePrefix(l:ini['mandatory']['executable'], '<prefix>', '/repo/sw')
+
+	 if s:ParameterExists(l:ini, 'optional', 'sysroot')
+		 execute ':Cset sysroot ' . s:ReplacePrefix(l:ini['optional']['sysroot'], '<prefix>', '/repo/sw')
+	 endif
+
+	 if s:ParameterExists(l:ini, 'optional', 'remote_target')
+		 execute ':Ctarget remote ' . l:ini['optional']['remote_target']
+	 endif
+
+	 if s:SectionExists(l:ini, 'breaks')
+		 for break in keys(l:ini['breaks'])
+			 execute ':Cbreak ' . break
+		 endfor
+	 endif
+
+	 if s:SectionExists(l:ini, 'extra_commands')
+		 for command in keys(l:ini['extra_commands'])
+			 execute command
+		 endfor
+	 endif
+
 	 execute ':Cmapkeys'
 endfunction
 
