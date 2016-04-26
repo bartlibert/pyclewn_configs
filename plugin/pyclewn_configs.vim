@@ -14,7 +14,7 @@ function! s:GetAllConfigsInPath(path, prefix)
 endfunction
 
 function! s:FileCompletion(ArgLead, CmdLine, CursorPos)
-	return s:GetAllConfigsInPath('/home/blibert/.vim/pyclewn_configs/', a:ArgLead)
+	return s:GetAllConfigsInPath(expand('~/.vim/pyclewn_configs/'), a:ArgLead)
 endfunction
 
 function! s:ReplacePrefix(value, prefix, replacement)
@@ -39,7 +39,7 @@ function! s:ParameterExists(ini, section, parameter)
 endfunction
 
 function! s:StartDebugging(configName)
-	 let l:path = '/home/blibert/.vim/pyclewn_configs/' . a:configName . '.cfg'
+	 let l:path = expand('~/.vim/pyclewn_configs/') . a:configName . '.cfg'
 	 let l:ini = IniParser#Read(l:path)
 
 	 if s:ParameterExists(l:ini, 'optional', 'gdb_path')
