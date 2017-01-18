@@ -7,8 +7,8 @@ command! -nargs=1 -complete=customlist,s:FileCompletion StartPyclewn :call s:Sta
 
 function! s:GetAllConfigsInPath(path, prefix)
 	let l:configFiles = []
-	for file in split(globpath(a:path, a:prefix . '*.cfg'), '\n')
-		call add(l:configFiles, fnamemodify(file, ':t:r'))
+	for l:file in split(globpath(a:path, a:prefix . '*.cfg'), '\n')
+		call add(l:configFiles, fnamemodify(l:file, ':t:r'))
 	endfor
 	return l:configFiles
 endfunction
@@ -58,14 +58,14 @@ function! s:StartDebugging(configName)
 	 endif
 
 	 if s:SectionExists(l:ini, 'breaks')
-		 for break in keys(l:ini['breaks'])
-			 execute ':Cbreak ' . break
+		 for l:break in keys(l:ini['breaks'])
+			 execute ':Cbreak ' . l:break
 		 endfor
 	 endif
 
 	 if s:SectionExists(l:ini, 'extra_commands')
-		 for command in keys(l:ini['extra_commands'])
-			 execute command
+		 for l:command in keys(l:ini['extra_commands'])
+			 execute l:command
 		 endfor
 	 endif
 
