@@ -46,6 +46,14 @@ function! s:StartDebugging(configName)
 		 execute ':let b:pyclewn_args.=" --pgm=' . s:ReplacePrefix(l:ini['optional']['gdb_path'], '<prefix>', '/repo/sw') . '"'
 	 endif
 
+	 if exists(':Cexitclewn')
+		 execute ':Cexitclewn'
+	 endif
+
+	 if exists(':Cunmapkeys')
+		 execute ':Cunmapkeys'
+	 endif
+
 	 execute ':Pyclewn'
 	 execute ':Cfile ' . s:ReplacePrefix(l:ini['mandatory']['executable'], '<prefix>', '/repo/sw')
 
